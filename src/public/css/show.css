@@ -1,0 +1,178 @@
+.item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1450px;
+    margin: 70px 40px;
+    gap: 20px;
+}
+
+.item-img {
+    flex: 1;
+    width: 50%;
+    height: 500px;
+    margin: 60px;
+    margin-top: 30px;
+    background: #CCC;
+}
+
+.item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-content {
+    flex: 1;
+    max-width: 50%;
+}
+
+.item-title {
+    margin: 5px 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.brand-title {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.item-price {
+    margin: 5px 0;
+    font-size: 28px;
+}
+
+.item-price span {
+    margin-left: 3px;
+    font-size: 16px;
+}
+
+.icon-group {
+    margin: 5px 0;
+    margin-left: 30px;
+    display: flex;
+    gap: 40px;
+}
+
+.favorite-icon,
+.comment-icon {
+    display: flex;
+    flex-direction: column;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.favorite-icon img,
+.comment-icon img {
+    width: 23px;
+    height: 23px;
+}
+
+.favorite-toggle {
+    display: none;
+}
+
+.favorite-toggle:checked~img {
+    filter: invert(39%) sepia(83%) saturate(749%) hue-rotate(340deg) brightness(93%) contrast(89%);
+}
+
+.favorite-count,
+.comment-count {
+    margin-left: 6px;
+}
+
+.purchase-button {
+    width: 80%;
+    height: 40px;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background: #ff4f4f;
+    border-radius: 3px;
+    color: #fff;
+    margin: 20px 0;
+    align-items: center;
+}
+
+.comment-title {
+    color: #696969;
+}
+
+.comment-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.user-img {
+    background: #ddd;
+    width: 65px;
+    height: 65px;
+    border-radius: 40px;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 8px;
+}
+
+.comment-text {
+    width: 85%;
+    margin: 20px 0;
+    background: #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    height: 60px;
+    align-items: center;
+}
+
+.comment-button {
+    width: 90%;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.form-title {
+    font-size: 23px;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.comment-form {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-content {
+    width: 100%;
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-submit {
+    width: 100%;
+    height: 40px;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    background: #ff4f4f;
+    border-radius: 3px;
+    color: #fff;
+    margin: 20px 0;
+    align-items: center;
+}
