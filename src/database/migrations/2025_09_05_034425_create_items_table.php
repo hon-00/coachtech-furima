@@ -17,13 +17,14 @@ class CreateItemsTable extends Migration
             $table->id();$table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                     ->references('id')
-                    ->on('users');
+                    ->on('users')
+                    ->onDelete('cascade');
             $table->string('name');
             $table->text('description');
             $table->string('condition', 50);
             $table->bigInteger('price');
             $table->string('brand', 100)->nullable();
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->boolean('sold_flag')->default(false);
             $table->timestamps();
         });
