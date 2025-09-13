@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +25,7 @@ Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])->nam
 Route::get('/register', [RegisterController::class, 'create'])->name('register.create');
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+Route::get('/mypage/profile', function () {
+    return 'プロフィール設定ページ（未実装）';
+})->name('mypage.profile');
