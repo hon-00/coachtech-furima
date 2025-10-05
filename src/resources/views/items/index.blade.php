@@ -34,9 +34,9 @@
     <div class="product-list">
         @foreach ($items as $item)
         <div class="product-card">
-            <a href="">
-                <img class="img-item" src="" alt="">
-                <p class="card-title">商品名</p>
+            <a href="{{ route('items.show', $item->id) }}">
+                <img class="img-item" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
+                <p class="card-title">{{ $item->name }}</p>
             </a>
         </div>
         @endforeach

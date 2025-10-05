@@ -17,17 +17,27 @@
                 <span>¥</span>{{ number_format($item->price) }}<span>(税込)</span>
             </p>
             <div class="icon-group">
-                <label class="favorite-icon">
-                    <input type="checkbox" class="favorite-toggle">
-                    <img src="{{ asset('images/星アイコン8.png') }}" alt="お気に入りアイコン">
-                    <span class="favorite-count">3</span>
-                </label>
+                @php
+                    $isLiked = $item->likes->contains('user_id', auth()->id());
+                @endphp
+                <form action="{{ route('like.toggle', $item) }}" method="POST">
+                    @csrf
+                    <label class="favorite-icon">
+                        <input class="favorite-toggle" type="checkbox"
+                        {{ $isLiked ? 'checked' : '' }}
+                        onchange="this.form.submit()">
+                        <img src="{{ asset('images/星アイコン8.png') }}" alt="お気に入りアイコン">
+                        <span class="favorite-count">{{ $item->likes->count() }}</span>
+                    </label>
+                </form>
                 <a href="#comments" class="comment-icon">
                     <img src="{{ asset('images/ふきだしのアイコン (1).png') }}" alt="コメントアイコン">
-                    <span class="comment-count">1</span>
+                    <span class="comment-count">{{ $item->comments->count() }}</span>
                 </a>
             </div>
-            <button class="purchase-button">購入手続きへ</button>
+            <a class="purchase-link" href="{{ route('purchase.create', $item->id) }}">
+                購入手続きへ
+            </a>
         </div>
         <div class="item-detail">
             <h3 class="detail-title">商品説明</h3>
@@ -35,15 +45,15 @@
             <h3 class="detail-title">商品の情報</h3>
             <p class="category">
                 カテゴリー
-                <span class="category-name"><!--{{ $item->category }}--></span>
+                <span class="category-name">{{ $item->categories->first()->name ?? '未設定' }}</span>
             </p>
             <p class="condition">
                 商品の状態
-                <span class="condition-name"><!--{{ $item->condition }}--></span>
+                <span class="condition-name">{{ $item->condition }}</span>
             </p>
         </div>
         <div class="comment">
-            <h3 class="comment-title" id="comments">コメント</h3>
+            <h3 class="comment-title" id="comments">コメント({{ $item->comments_count }})</h3>
             <div class="comment-list">
                 @foreach($item->comments as $comment)
                 <div class="comment-item">
@@ -52,15 +62,6 @@
                     <p class="comment-text">{{ $comment->content }}</p>
                 </div>
                 @endforeach
-                <!--レイアウト用-->
-                <div class="comment-item">
-                    <div class="comment-wrapper">
-                <img class="user-img" src="{{ asset('images/default_icon.png') }}" alt="" >
-                        <p class="user-name">admin</p>
-                    </div>
-                    <p class="comment-text">こちらにコメントが入ります。</p>
-                    <!--ここまで-->
-                </div>
             </div>
             <h4 class="form-title">商品へのコメント</h4>
             <form class="comment-form" action="{{ route('comment.store', $item->id) }}" method="post">

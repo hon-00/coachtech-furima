@@ -85,20 +85,33 @@
     margin-left: 6px;
 }
 
-.purchase-button {
-    width: 80%;
-    height: 40px;
-    font-size: 17px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    appearance: none;
+.purchase-link {
+    display: block;
+    width: 90%;
+    height: 45px;
     background: #ff4f4f;
     border-radius: 3px;
     color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 21px;
+    text-align: center;
+    line-height: 45px;
     margin: 20px 0;
     align-items: center;
+}
+
+.detail-title {
+    font-size: 23px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.description {
+    margin: 20px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    line-break: anywhere;
 }
 
 .comment-title {
@@ -120,10 +133,12 @@
 }
 
 .user-name {
+    display: inline-block;
     font-weight: bold;
     font-size: 18px;
     margin-left: 8px;
 }
+
 
 .comment-text {
     width: 85%;
@@ -131,7 +146,6 @@
     background: #ddd;
     border-radius: 5px;
     padding: 20px;
-    height: 60px;
     align-items: center;
 }
 
