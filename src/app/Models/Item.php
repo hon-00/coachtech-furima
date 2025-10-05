@@ -34,4 +34,9 @@ class Item extends Model
     {
         return $this->belongsToMany(Category::class, 'item_category');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

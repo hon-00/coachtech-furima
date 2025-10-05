@@ -12,7 +12,7 @@
     <header class="header">
         <div class="header-inner">
             <h1 class="header-logo">
-                <a class="header-logo__link" href="">
+                <a class="header-logo__link" href="{{ route('home') }}">
                     <img class="header-logo__img" src="{{ asset('images/logo.svg') }}" alt="Logo" />
                 </a>
             </h1>
@@ -27,7 +27,7 @@
         <nav>
             <ul class="header-nav">
                 <li class="header-nav__item">
-                    <a class="header-nav__link" href="">ログイン</a>
+                    <a class="header-nav__link" href="{{ route('login') }}">ログイン</a>
                 </li>
                 <li class="header-nav__item">
                     <a class="header-nav__link" href="">マイページ</a>
