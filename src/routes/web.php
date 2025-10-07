@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{item}', [OrderController::class, 'create'])->name('purchase.create');
         Route::post('/{item}', [OrderController::class, 'store'])->name('purchase.store');
         Route::get('/address/{item}', [OrderController::class, 'editAddress'])->name('purchase.editAddress');
-        Route::post('/address/{item}', [OrderController::class, 'updateAddress'])->name('purchase.updateAddress');
+        Route::put('/address/{item}', [OrderController::class, 'updateAddress'])->name('purchase.updateAddress');
     });
+
+    // その他の認証が必要なルートをここに追加
 });
