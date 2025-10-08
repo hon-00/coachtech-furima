@@ -34,7 +34,7 @@
         <div class="purchase__delivery">
             <div class="purchase__delivery-row">
                 <h3 class="purchase__delivery-title">配送先</h3>
-                <a class="purchase__delivery-link" href="">変更する</a>
+                <a class="purchase__delivery-link" href="{{ route('purchase.editAddress', ['item' => $item->id]) }}">変更する</a>
             </div>
             <div class="purchase__delivery-content">
                 <p class="purchase__delivery-text"><span>〒</span>{{ $user->postal_code }}</p>
