@@ -34,4 +34,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class); // 出品した商品
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Order::class); // 購入履歴
+    }
+
+    public function getProfileImageUrlAttribute()
+    {
+        return $this->profile_image
+            ? asset('storage/' . $this->profile_image)
+            : asset('storage/avatars/kkrn_icon_user_1.svg'); // 初回ダミー画像
+    }
 }
