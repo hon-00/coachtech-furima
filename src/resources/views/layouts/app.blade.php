@@ -26,13 +26,25 @@
         </div>
         <nav>
             <ul class="header-nav">
-                <li class="header-nav__item">
-                    <a class="header-nav__link" href="{{ route('login') }}">ログイン</a>
-                </li>
+                @auth
+                    <li class="header-nav__item">
+                        <form class="header-nav__form" method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="header-nav__link">
+                                ログアウト
+                            </button>
+                        </form>
+                    </li>
+                @else
+                    <li class="header-nav__item">
+                        <a class="header-nav__link" href="{{ route('login') }}">ログイン</a>
+                    </li>
+                @endauth
+
                 <li class="header-nav__item">
                     <a class="header-nav__link" href="">マイページ</a>
                 </li>
-                <li class="header-nav__item">
+                <li class="header-nav__item--sell">
                     <a class="header-nav__link" href="">出品</a>
                 </li>
             </ul>
