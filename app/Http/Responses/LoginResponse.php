@@ -13,7 +13,7 @@ class LoginResponse implements LoginResponseContract
         if ($user->is_first_login) {
             $user->update(['is_first_login' => false]);
 
-            return redirect()->route('profile.edit');
+            return redirect()->route('mypage.edit');
         }
 
         return redirect()->route('home');
