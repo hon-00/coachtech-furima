@@ -3,10 +3,7 @@
 /src/vendor/
 
 /src/storage/*
-!/src/storage/app
-!/src/storage/app/public
-!/src/storage/framework
-!/src/storage/logs
+!src/storage/.gitignore
 
 /public/storage
 /src/public/storage
