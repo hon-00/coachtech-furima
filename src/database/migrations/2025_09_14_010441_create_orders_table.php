@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->bigInteger('total_amount')->unsigned();
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
             $table->enum('payment_method', ['credit_card','bank_transfer','convenience_store']);
             $table->timestamps();
         });

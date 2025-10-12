@@ -22,6 +22,7 @@ class UserFactory extends Factory
             'address' => $this->faker->address(),
             'building' => $this->faker->optional()->secondaryAddress(),
             'profile_image' => $this->faker->imageUrl(200, 200, 'people', true),
+            'is_first_login' => true,
             'remember_token' => Str::random(10),
         ];
     }
