@@ -11,17 +11,19 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'total_amount',
+        'item_id',
         'payment_method',
     ];
 
+    // 購入者
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function orderDetails()
+    // 購入商品
+    public function item()
     {
-        return $this->hasMany(OrderDetail::class);
+        return $this->belongsTo(Item::class);
     }
 }

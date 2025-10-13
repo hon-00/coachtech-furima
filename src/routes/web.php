@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
-
 use App\Http\Controllers\OrderController;
 
 Route::get('/', [ItemController::class, 'index'])->name('home');
@@ -15,16 +15,6 @@ Route::post('/item/{item_id}/comment', [CommentController::class, 'store'])
     ->name('comment.store')
     ->middleware('auth');
 
-/*
-|------------------------------------
-| プロフィール関連
-|------------------------------------
-|
-| Route::get('/profile/edit', [ProfileController::class, 'edit'])
-|     ->name('profile.edit')
-|     ->middleware('auth');
-|
-*/
 // ログイン限定機能
 Route::middleware('auth')->group(function () {
     Route::post('/items/{item}/like', [LikeController::class, 'toggle'])->name('like.toggle');
@@ -37,5 +27,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/address/{item}', [OrderController::class, 'updateAddress'])->name('purchase.updateAddress');
     });
 
-    // その他の認証が必要なルートをここに追加
+    Route::prefix('mypage')->group(function () {
+        Route::get('/', [UserController::class, 'show'])->name('mypage.show');
+        Route::get('/profile', [UserController::class, 'edit'])->name('mypage.edit');
+        Route::put('/profile', [UserController::class, 'update'])->name('mypage.update');
+    });
 });

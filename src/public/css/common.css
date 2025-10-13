@@ -46,7 +46,12 @@
     align-items: center;
 }
 
-.header-nav__link {
+
+
+.header-nav__link,
+button.header-nav__link {
+    all: unset;
+    cursor: pointer;
     display: flex;
     gap: 10px;
     margin: 0 8px;
@@ -56,10 +61,11 @@
     color: #fff;
 }
 
-.header-nav__item:last-child .header-nav__link {
+.header-nav__item--sell .header-nav__link{
     background: #fff;
     color: #000;
     border-radius: 3px;
     padding: 5px 15px;
     margin-left: 8px;
 }
+
