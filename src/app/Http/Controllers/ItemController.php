@@ -10,12 +10,31 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->input('keyword');
-        $items = Item::query()
-        ->when($keyword, fn($query) => $query->where('name', 'like', "%{$keyword}%"))
-        ->latest()
-        ->get();
+        $tab = $request->query('tab', 'recommend');
 
-        return view('items.index', compact('items'));
+        // マイリスト（お気に入り一覧）
+        if ($tab === 'mylist' && auth()->check()) {
+            $query = auth()->user()->likedItems();
+
+            // nameをキーワードで部分一致検索
+            if ($keyword) {
+                $query->where('name', 'like', "%{$keyword}%");
+            }
+
+            $items = $query->latest()->get();
+        }
+        // 通常のおすすめ（全商品または検索）
+        else {
+            $query = Item::query();
+
+            if ($keyword) {
+                $query->where('name', 'like', "%{$keyword}%");
+            }
+
+            $items = $query->latest()->get();
+        }
+
+        return view('items.index', compact('items', 'tab', 'keyword'));
     }
 
     public function show($item_id)

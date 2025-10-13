@@ -9,15 +9,9 @@ class LikeController extends Controller
 {
     public function toggle(Item $item)
     {
-        $like = $item->likes()->where('user_id', auth()->id())->first();
+        $user = auth()->user();
 
-        if ($like) {
-            $like->delete();
-        } else {
-            $item->likes()->create([
-                'user_id' => auth()->id(),
-            ]);
-        }
+        $user->likedItems()->toggle($item->id);
 
         return back();
     }
