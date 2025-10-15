@@ -29,6 +29,11 @@ class ItemController extends Controller
         else {
             $query = Item::query();
 
+            // 自分の出品を除外
+            if (auth()->check()) {
+                $query->where('user_id', '!=', auth()->id());
+            }
+
             if ($keyword) {
                 $query->where('name', 'like', "%{$keyword}%");
             }
