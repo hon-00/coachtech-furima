@@ -32,4 +32,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/profile', [UserController::class, 'edit'])->name('mypage.edit');
         Route::put('/profile', [UserController::class, 'update'])->name('mypage.update');
     });
+
+    // 出品画面表示
+    Route::get('/items/create', [ItemController::class, 'create'])
+        ->name('items.create');
+
+    // 出品処理
+    Route::post('/items', [ItemController::class, 'store'])
+        ->name('items.store');
 });

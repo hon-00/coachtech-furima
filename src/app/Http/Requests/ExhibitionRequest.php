@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ExhibitionRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+            'image' => 'required|image|mimes:jpeg,png|max:1024',
+            'category_id' => 'required|array|min:1|max:3',
+            'category_id.*' => 'exists:categories,id',
+            'condition' => 'required|string|max:50',
+            'brand' => 'nullable|string|max:100',
+            'price' => 'required|numeric|min:0|max:1000000',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => '商品名は必須です。',
+            'description.required' => '商品説明は必須です。',
+            'image.required' => '商品画像は必須です。',
+            'image.image' => '画像ファイルである必要があります。',
+            'image.mimes' => 'JPEGまたはPNG形式の画像を選択してください。',
+            'category_id.required' => 'カテゴリーは必須です。',
+            'category_id.*.exists' => '選択されたカテゴリーは存在しません。',
+            'category_id.max' => 'カテゴリーは最大3つまで選択できます。',
+            'condition.required' => '商品の状態は必須です。',
+            'price.required' => '価格は必須です。',
+            'price.numeric' => '価格は数値で入力してください。',
+            'price.min' => '価格は0円以上にしてください。',
+        ];
+    }
+
+}
