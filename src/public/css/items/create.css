@@ -1,0 +1,183 @@
+.content {
+    max-width: 1450px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.content-title {
+    font-size: 25px;
+    margin-bottom: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.form-item {
+    width: 600px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.form-subtitle {
+    display: inline-block;
+    width: 600px;
+    border-bottom: 1px solid #CCC;
+    color: #5d5d5d;
+    font-size: 21px;
+    margin-top: 45px;
+    padding-bottom: 6px;
+    text-align: left;
+}
+
+.content-error {
+    width: 600px;
+    text-align: left;
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.image-upload {
+    width: 600px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #7c7c7c;
+    border-radius: 3px;
+    margin: 0 auto;
+}
+
+.image-file {
+    color: rgb(255, 80, 74);
+    border: 2px solid rgb(255, 80, 74);
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 8px 16px;
+}
+
+.category-buttons {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px auto;
+    gap: 15px;
+}
+
+.category-button {
+    color: rgb(255, 80, 74);
+    border: 2px solid rgb(255, 80, 74);
+    font-size: 13px;
+    border-radius: 30px;
+    margin-bottom: 13px;
+    padding: 2px 13px;
+}
+
+.category-input:checked+.category-button {
+    background-color: rgb(255, 80, 74);
+    color: #fff;
+}
+
+
+select {
+    width: 100%;
+    appearance: none;
+    border: 1px solid #676767;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    display: block;
+    padding: 7px 13px;
+    font-weight: bold;
+    color: #636363;
+}
+
+select:focus {
+    outline: none;
+}
+
+.form-select {
+    position: relative;
+    width: 600px;
+}
+
+.form-select::before {
+    position: absolute;
+    top: 40%;
+    left: 95%;
+    content: '';
+    width: 15px;
+    height: 10px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #636363;
+    pointer-events: none;
+}
+
+select option {
+    background: #565656;
+    color: #fff;
+}
+
+.form-input {
+    width: 600px;
+    height: 45px;
+    border: 1px solid #7c7c7c;
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: none;
+}
+
+.price-input {
+    position: relative;
+    width: 600px;
+}
+
+.price-input::before {
+    /* ￥記号を input 内部に表示するための疑似要素 */
+    content: '￥';
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: #333;
+    pointer-events: none;
+    /* 入力クリックの邪魔をしない */
+}
+
+.price-input input {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #7c7c7c;
+    border-radius: 3px;
+    padding-left: 28px;
+    /* ￥の分だけ文字の開始位置を右へ */
+    font-size: 14px;
+}
+
+.form-button {
+    width: 600px;
+    height: 45px;
+    background: #ff4f4f;
+    border-radius: 3px;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    line-height: 45px;
+    letter-spacing: 1px;
+    margin: 50px 0;
+    align-items: center;
+}
