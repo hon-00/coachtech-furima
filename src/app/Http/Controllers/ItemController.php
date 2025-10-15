@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\ExhibitionRequest;
 
 class ItemController extends Controller
 {
@@ -48,5 +50,39 @@ class ItemController extends Controller
         ->findOrFail($item_id);
 
         return view('items.show', compact('item'));
+    }
+
+
+    // 商品出品画面表示
+    public function create()
+    {
+        // カテゴリー一覧を取得
+        $categories = Category::orderBy('id')->get();
+
+        return view('items.create', compact('categories'));
+    }
+
+    // 商品出品処理
+    public function store(ExhibitionRequest $request)
+    {
+        $validated = $request->validated();
+
+        // 画像アップロード
+        $validated['image'] = $request->file('image')?->store('item_images', 'public');
+
+        // 出品者と売却フラグ
+        $validated['user_id'] = auth()->id();
+        $validated['sold_flag'] = false;
+
+        // Item登録
+        $item = Item::create($validated);
+
+        // カテゴリー登録（存在する場合のみ）
+        if (!empty($validated['category_id'])) {
+            $item->categories()->sync($validated['category_id']);
+        }
+
+        return redirect()->route('items.show', $item->id)
+                            ->with('success', '商品を出品しました');
     }
 }
