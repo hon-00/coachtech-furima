@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileRequest;
 
 class UserController extends Controller
 {
@@ -22,17 +23,12 @@ class UserController extends Controller
         return view('mypage.edit', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
         $user = $request->user();
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'postal_code' => 'nullable|string|max:255',
-            'address' => 'nullable|string|max:255',
-            'building' => 'nullable|string|max:255',
-            'profile_image' => 'nullable|image|max:1024',
-        ]);
+        // バリデーション済みデータを取得
+        $validated = $request->validated();
 
         if ($request->hasFile('profile_image')) {
             $validated['profile_image'] = $request->file('profile_image')
@@ -42,6 +38,6 @@ class UserController extends Controller
         $user->update($validated);
 
         return redirect()->route('mypage.show')
-                        ->with('status', 'プロフィールを更新した');
+                            ->with('status', 'プロフィールを更新しました。');
     }
 }
