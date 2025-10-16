@@ -40,6 +40,9 @@
                             <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
                             <p class="product-name">{{ $item->name }}</p>
                         </a>
+                        @if($item->sold_flag)
+                            <span class="sold-label">Sold</span>
+                        @endif
                     </div>
                 @empty
                     <p class="no-items">出品した商品はありません</p>
@@ -54,6 +57,9 @@
                             <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
                             <p class="product-name">{{ $item->name }}</p>
                         </a>
+                        @if($item->sold_flag)
+                            <span class="sold-label">Sold</span>
+                        @endif
                     </div>
                 @empty
                     <p class="no-items">購入した商品はありません</p>

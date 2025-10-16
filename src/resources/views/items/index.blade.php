@@ -33,6 +33,9 @@
                                 <img class="product-img" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
                                 <p class="product-name">{{ $item->name }}</p>
                             </a>
+                            @if($item->sold_flag)
+                                <span class="sold-label">Sold</span>
+                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -48,6 +51,9 @@
                         <img class="product-img" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
                         <p class="product-name">{{ $item->name }}</p>
                     </a>
+                    @if($item->sold_flag)
+                        <span class="sold-label">Sold</span>
+                    @endif
                 </div>
             @endforeach
         </div>
