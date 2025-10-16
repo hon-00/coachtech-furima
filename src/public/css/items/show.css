@@ -14,7 +14,6 @@
     height: 500px;
     margin: 60px;
     margin-top: 30px;
-    background: #CCC;
 }
 
 .item-img img {
@@ -128,6 +127,27 @@
     line-break: anywhere;
 }
 
+.category :first-child {
+    margin-left: 3.5em;
+}
+
+.category-name {
+    background: #ddd;
+    border: 2px solid #ddd;
+    font-size: 13px;
+    border-radius: 30px;
+    margin-right: 10px;
+    margin-bottom: 13px;
+    padding: 2px 13px;
+}
+
+.condition-name {
+    font-size: 14px;
+    margin-left: 3.5em;
+    margin-bottom: 13px;
+    padding: 2px 13px;
+}
+
 .comment-title {
     color: #696969;
 }
@@ -140,9 +160,8 @@
 }
 
 .user-img {
-    background: #ddd;
-    width: 65px;
-    height: 65px;
+    width: 75px;
+    height: 75px;
     border-radius: 40px;
 }
 

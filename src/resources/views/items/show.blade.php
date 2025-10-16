@@ -50,7 +50,9 @@
             <h3 class="detail-title">商品の情報</h3>
             <p class="category">
                 カテゴリー
-                <span class="category-name">{{ $item->categories->first()->name ?? '未設定' }}</span>
+                @foreach($item->categories as $category)
+                <span class="category-name">{{ $category->name }}</span>
+                @endforeach
             </p>
             <p class="condition">
                 商品の状態
@@ -62,7 +64,7 @@
             <div class="comment-list">
                 @foreach($item->comments as $comment)
                 <div class="comment-item">
-                    <img class="user-img" src="{{ asset('images/default_icon.png') }}" alt="" >
+                    <img class="user-img" src="{{ $comment->user->profile_image_url ?? asset('images/default_icon.png') }}" alt="{{ $comment->user->name }}">
                     <p class="user-name">{{ $comment->user->name }}:</p>
                     <p class="comment-text">{{ $comment->content }}</p>
                 </div>
