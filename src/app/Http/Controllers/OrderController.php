@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Order;
 use App\Http\Requests\AddressRequest;
 
 class OrderController extends Controller
@@ -23,8 +24,18 @@ class OrderController extends Controller
         $item = Item::findOrFail($item_id);
         $user = auth()->user();
 
-        // 決済処理や注文登録の処理を書く場所
-        // Order::create([...]);
+        // フォーム名 payment に合わせる
+        $paymentMethod = $request->input('payment', 'convenience_store');
+
+        // 注文登録
+        Order::create([
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+            'payment_method' => $paymentMethod,
+        ]);
+
+        // 商品が購入済みならフラグ更新
+        $item->update(['sold_flag' => true]);
 
         return redirect()->route('home')->with('success', '購入が完了しました');
     }

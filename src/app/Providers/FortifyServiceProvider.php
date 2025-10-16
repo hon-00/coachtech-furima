@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
-use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -17,7 +17,7 @@ class FortifyServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->singleton(LoginResponse::class, CustomLoginResponse::class);
+        $this->app->singleton(LoginResponseContract::class, CustomLoginResponse::class);
     }
 
     public function boot()
