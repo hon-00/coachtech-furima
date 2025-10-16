@@ -1,3 +1,9 @@
+.alert-success {
+    color: rgb(255, 80, 74);
+    border-bottom: 1px solid rgb(255, 80, 74);
+    padding: 10px 15px;
+}
+
 .content {
     max-width: 1450px;
     margin: 50px auto;
