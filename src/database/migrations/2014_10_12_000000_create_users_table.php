@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('building')->nullable();
             $table->string('profile_image')->nullable();
-            $table->boolean('is_first_login')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

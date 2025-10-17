@@ -10,11 +10,13 @@ class LoginResponse implements LoginResponseContract
     {
         $user = $request->user();
 
-        if ($user->is_first_login) {
-            $user->update(['is_first_login' => false]);
+        $request->session()->forget('url.intended');
 
+        if (session('just_registered')) {
+            session()->forget('just_registered');
             return redirect()->route('mypage.edit');
         }
+
 
         return redirect()->route('home');
     }

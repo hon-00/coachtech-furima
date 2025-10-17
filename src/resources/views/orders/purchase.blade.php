@@ -5,6 +5,21 @@
 @endsection
 
 @section('content')
+@if(session('success'))
+    <div class="alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+@if($errors->any())
+    <div class="alert-error">
+        <ul class="alert-error__list">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="purchase__content">
     <div class="purchase__group">
         <div class="purchase__item">
@@ -68,6 +83,7 @@
         <form action="{{ route('purchase.store', $item->id) }}" method="POST">
             @csrf
             <input type="hidden" name="payment" value="{{ $payment }}">
+            <input type="hidden" name="address" value="{{ $user->address }}">
             <button class="purchase__summary-button" type="submit">購入する</button>
         </form>
     </div>

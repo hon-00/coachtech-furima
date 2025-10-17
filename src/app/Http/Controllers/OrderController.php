@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Order;
 use App\Http\Requests\AddressRequest;
+use App\Http\Requests\PurchaseRequest;
 
 class OrderController extends Controller
 {
@@ -19,19 +20,20 @@ class OrderController extends Controller
         return view('orders.purchase', compact('item', 'user', 'payment'));
     }
 
-    public function store(Request $request, $item_id)
+    public function store(PurchaseRequest $request, $item_id)
     {
         $item = Item::findOrFail($item_id);
         $user = auth()->user();
 
-        // フォーム名 payment に合わせる
-        $paymentMethod = $request->input('payment', 'convenience_store');
+        // バリデーション済みデータを取得
+        $validated = $request->validated();
 
         // 注文登録
         Order::create([
             'user_id' => $user->id,
             'item_id' => $item->id,
-            'payment_method' => $paymentMethod,
+            'payment_method' => $validated['payment'],
+            'address' => $validated['address'],
         ]);
 
         // 商品が購入済みならフラグ更新

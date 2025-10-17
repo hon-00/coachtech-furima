@@ -8,6 +8,22 @@
     gap: 20px;
 }
 
+.alert-success {
+    color: rgb(255, 80, 74);
+    border-bottom: 1px solid rgb(255, 80, 74);
+    padding: 10px 15px;
+}
+
+.alert-error {
+    color: rgb(255, 80, 74);
+    border-bottom: 1px solid rgb(255, 80, 74);
+    padding: 10px 15px;
+}
+
+.alert-error__list {
+    list-style: none;
+}
+
 .purchase__group {
     width: 60%;
     margin-bottom: 15px;
@@ -16,7 +32,6 @@
 
 .purchase__item {
     display: flex;
-    align-items: center;
     gap: 50px;
     padding-bottom: 25px;
     margin-bottom: 25px;
