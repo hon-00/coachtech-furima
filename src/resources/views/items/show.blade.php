@@ -14,7 +14,7 @@
     </div>
     <div class="item-content">
         <div class="item-info">
-            <h2 class="item-title">{{ $item->name }}</h2>
+            <h1 class="item-title">{{ $item->name }}</h1>
             <p class="brand-title">{{ $item->description }}</p>
             <p class="item-price">
                 <span>¥</span>{{ number_format($item->price) }}<span>(税込)</span>
@@ -45,9 +45,9 @@
             @endif
         </div>
         <div class="item-detail">
-            <h3 class="detail-title">商品説明</h3>
+            <h2 class="detail-title">商品説明</h2>
             <p class="description">{{ $item->description }}</p>
-            <h3 class="detail-title">商品の情報</h3>
+            <h2 class="detail-title">商品の情報</h2>
             <p class="category">
                 カテゴリー
                 @foreach($item->categories as $category)
@@ -60,7 +60,7 @@
             </p>
         </div>
         <div class="comment">
-            <h3 class="comment-title" id="comments">コメント({{ $item->comments_count }})</h3>
+            <h2 class="comment-title" id="comments">コメント({{ $item->comments_count }})</h2>
             <div class="comment-list">
                 @foreach($item->comments as $comment)
                 <div class="comment-item">
@@ -70,7 +70,7 @@
                 </div>
                 @endforeach
             </div>
-            <h4 class="form-title">商品へのコメント</h4>
+            <h3 class="form-title">商品へのコメント</h3>
             <form class="comment-form" action="{{ route('comment.store', $item->id) }}" method="post">
                 @csrf
                 <textarea class="form-content" name="content">{{ old('content') }}</textarea>

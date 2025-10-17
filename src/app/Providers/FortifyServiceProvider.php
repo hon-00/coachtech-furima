@@ -42,10 +42,8 @@ class FortifyServiceProvider extends ServiceProvider
         ]);
     });
 
-        // 新規登録画面
         Fortify::registerView(fn () => view('auth.register'));
 
-        // ユーザー登録処理
         Fortify::createUsersUsing(CreateNewUser::class);
     }
 }

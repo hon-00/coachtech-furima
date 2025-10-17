@@ -11,8 +11,8 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $user = $request->user();
-        $listedItems = $user->items()->get();// 出品一覧
-        $purchasedItems = $user->orders()->with('item')->get();// 購入一覧（単品）
+        $listedItems = $user->items()->get();
+        $purchasedItems = $user->orders()->with('item')->get();
 
         return view('mypage.show', compact('user', 'listedItems', 'purchasedItems'));
     }
@@ -27,7 +27,6 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        // バリデーション済みデータを取得
         $validated = $request->validated();
 
         if ($request->hasFile('profile_image')) {
