@@ -5,41 +5,58 @@
 @endsection
 
 @section('content')
-<div class="tab-area">
+<div class="tab-group">
     <ul class="tab-list">
         <li class="tab-item">
-            <a class="tab-link {{ request('tab') !== 'mylist' ? 'is-active' : '' }}" href="{{ url('/') }}">
+            <a class="tab-link {{ $tab === 'recommend' ? 'active' : '' }}" href="{{ url('/') }}{{ $keyword ? '?keyword=' . $keyword : '' }}">
                 おすすめ
             </a>
         </li>
         <li class="tab-item">
-            <a class="tab-link {{ request('tab') === 'mylist' ? 'is-active' : '' }}" href="{{ url('/?tab=mylist') }}" >
+            <a class="tab-link {{ $tab === 'mylist' ? 'active' : '' }}" href="{{ url('/?tab=mylist') }}{{ $keyword ? '&keyword=' . $keyword : '' }}">
                 マイリスト
             </a>
         </li>
     </ul>
 </div>
-@if(request('tab') === 'mylist')
-            @auth
-                <div class="mylist-container">
-                    <ul class="mylist-items">
-                        <li class="mylist-item">
-                            <img src="" alt="">
-                            <span></span>
-                        </li>
-                    </ul>
+
+<div class="content-item">
+    @if($tab === 'mylist')
+        @auth
+            @if($items->isEmpty())
+                <p>お気に入り登録した商品はありません。</p>
+            @else
+                <div class="product-list">
+                    @foreach($items as $item)
+                        <div class="product-item">
+                            <a href="{{ route('items.show', $item->id) }}">
+                                <img class="product-img" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
+                                <p class="product-name">{{ $item->name }}</p>
+                            </a>
+                            @if($item->sold_flag)
+                                <span class="sold-label">Sold</span>
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
-            @endauth
-@else
-    <div class="product-list">
-        @foreach ($items as $item)
-        <div class="product-card">
-            <a href="">
-                <img class="img-item" src="" alt="">
-                <p class="card-title">商品名</p>
-            </a>
+            @endif
+        @else
+            <p>マイリストを見るにはログインが必要です。</p>
+        @endauth
+    @else
+        <div class="product-list">
+            @foreach ($items as $item)
+                <div class="product-item">
+                    <a href="{{ route('items.show', $item->id) }}">
+                        <img class="product-img" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
+                        <p class="product-name">{{ $item->name }}</p>
+                    </a>
+                    @if($item->sold_flag)
+                        <span class="sold-label">Sold</span>
+                    @endif
+                </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
-@endif
+    @endif
+</div>
 @endsection

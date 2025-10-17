@@ -12,7 +12,7 @@
     <header class="header">
         <div class="header-inner">
             <h1 class="header-logo">
-                <a class="header-logo__link" href="">
+                <a class="header-logo__link" href="{{ route('home') }}">
                     <img class="header-logo__img" src="{{ asset('images/logo.svg') }}" alt="Logo" />
                 </a>
             </h1>
@@ -26,14 +26,26 @@
         </div>
         <nav>
             <ul class="header-nav">
+                @auth
+                    <li class="header-nav__item">
+                        <form class="header-nav__form" method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="header-nav__link">
+                                ログアウト
+                            </button>
+                        </form>
+                    </li>
+                @else
+                    <li class="header-nav__item">
+                        <a class="header-nav__link" href="{{ route('login') }}">ログイン</a>
+                    </li>
+                @endauth
+
                 <li class="header-nav__item">
-                    <a class="header-nav__link" href="">ログイン</a>
+                    <a class="header-nav__link" href="{{ route('mypage.show') }}">マイページ</a>
                 </li>
-                <li class="header-nav__item">
-                    <a class="header-nav__link" href="">マイページ</a>
-                </li>
-                <li class="header-nav__item">
-                    <a class="header-nav__link" href="">出品</a>
+                <li class="header-nav__item--sell">
+                    <a class="header-nav__link" href="{{ route('items.create') }}">出品</a>
                 </li>
             </ul>
         </nav>

@@ -1,68 +1,76 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/show.css') }}">
+<link rel="stylesheet" href="{{ asset('css/items/show.css') }}">
 @endsection
 
 @section('content')
 <div class="item-container">
     <div class="item-img">
         <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
+        @if($item->sold_flag)
+            <span class="sold-label">Sold</span>
+        @endif
     </div>
     <div class="item-content">
         <div class="item-info">
-            <h2 class="item-title">{{ $item->name }}</h2>
+            <h1 class="item-title">{{ $item->name }}</h1>
             <p class="brand-title">{{ $item->description }}</p>
             <p class="item-price">
                 <span>¥</span>{{ number_format($item->price) }}<span>(税込)</span>
             </p>
             <div class="icon-group">
-                <label class="favorite-icon">
-                    <input type="checkbox" class="favorite-toggle">
-                    <img src="{{ asset('images/星アイコン8.png') }}" alt="お気に入りアイコン">
-                    <span class="favorite-count">3</span>
-                </label>
+                @php
+                    $isLiked = $item->likes->contains('user_id', auth()->id());
+                @endphp
+                <form action="{{ route('like.toggle', $item) }}" method="POST">
+                    @csrf
+                    <label class="favorite-icon">
+                        <input class="favorite-toggle" type="checkbox"
+                        {{ $isLiked ? 'checked' : '' }}
+                        onchange="this.form.submit()">
+                        <img src="{{ asset('images/星アイコン8.png') }}" alt="お気に入りアイコン">
+                        <span class="favorite-count">{{ $item->likes->count() }}</span>
+                    </label>
+                </form>
                 <a href="#comments" class="comment-icon">
                     <img src="{{ asset('images/ふきだしのアイコン (1).png') }}" alt="コメントアイコン">
-                    <span class="comment-count">1</span>
+                    <span class="comment-count">{{ $item->comments->count() }}</span>
                 </a>
             </div>
-            <button class="purchase-button">購入手続きへ</button>
+            @if(!$item->sold_flag)
+                <a class="purchase-link" href="{{ route('purchase.create', $item->id) }}">
+                購入手続きへ
+                </a>
+            @endif
         </div>
         <div class="item-detail">
-            <h3 class="detail-title">商品説明</h3>
+            <h2 class="detail-title">商品説明</h2>
             <p class="description">{{ $item->description }}</p>
-            <h3 class="detail-title">商品の情報</h3>
+            <h2 class="detail-title">商品の情報</h2>
             <p class="category">
                 カテゴリー
-                <span class="category-name"><!--{{ $item->category }}--></span>
+                @foreach($item->categories as $category)
+                <span class="category-name">{{ $category->name }}</span>
+                @endforeach
             </p>
             <p class="condition">
                 商品の状態
-                <span class="condition-name"><!--{{ $item->condition }}--></span>
+                <span class="condition-name">{{ $item->condition }}</span>
             </p>
         </div>
         <div class="comment">
-            <h3 class="comment-title" id="comments">コメント</h3>
+            <h2 class="comment-title" id="comments">コメント({{ $item->comments_count }})</h2>
             <div class="comment-list">
                 @foreach($item->comments as $comment)
                 <div class="comment-item">
-                    <img class="user-img" src="{{ asset('images/default_icon.png') }}" alt="" >
+                    <img class="user-img" src="{{ $comment->user->profile_image_url ?? asset('images/default_icon.png') }}" alt="{{ $comment->user->name }}">
                     <p class="user-name">{{ $comment->user->name }}:</p>
                     <p class="comment-text">{{ $comment->content }}</p>
                 </div>
                 @endforeach
-                <!--レイアウト用-->
-                <div class="comment-item">
-                    <div class="comment-wrapper">
-                <img class="user-img" src="{{ asset('images/default_icon.png') }}" alt="" >
-                        <p class="user-name">admin</p>
-                    </div>
-                    <p class="comment-text">こちらにコメントが入ります。</p>
-                    <!--ここまで-->
-                </div>
             </div>
-            <h4 class="form-title">商品へのコメント</h4>
+            <h3 class="form-title">商品へのコメント</h3>
             <form class="comment-form" action="{{ route('comment.store', $item->id) }}" method="post">
                 @csrf
                 <textarea class="form-content" name="content">{{ old('content') }}</textarea>
