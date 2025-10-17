@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="content">
-    <h2 class="content-title">商品の出品</h2>
+    <h1 class="content-title">商品の出品</h1>
 
     <form class="content-form" action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -22,7 +22,7 @@
             @enderror
         </div>
 
-        <h3 class="form-subtitle">商品の詳細</h3>
+        <h2 class="form-subtitle">商品の詳細</h2>
         <div class="form-group">
             <label class="form-item">カテゴリー</label>
             <div class="category-buttons">
@@ -65,7 +65,7 @@
             </div>
         </div>
 
-        <h3 class="form-subtitle">商品名と説明</h3>
+        <h2 class="form-subtitle">商品名と説明</h2>
         <div class="form-group">
             <label class="form-item" for="name">商品名</label>
             <input class="form-input" id="name" type="text" name="name" value="{{ old('name') }}">
