@@ -31,19 +31,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // 出品商品
     public function items()
     {
         return $this->hasMany(Item::class);
     }
 
-    // 購入履歴（単品仕様）
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
-    // いいね
     public function likes()
     {
         return $this->belongsToMany(Item::class, 'likes', 'user_id', 'item_id');
@@ -54,7 +51,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Item::class, 'likes', 'user_id', 'item_id');
     }
 
-    // プロフィール画像URL
     public function getProfileImageUrlAttribute()
     {
         return $this->profile_image
