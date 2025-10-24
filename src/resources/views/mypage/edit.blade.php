@@ -86,7 +86,7 @@
             @endif
         </div>
 
-        <button class="form-button" type="submit">変更する</button>
+        <button class="form-button" type="submit">更新する</button>
     </form>
 </div>
 @endsection
