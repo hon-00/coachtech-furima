@@ -7,7 +7,6 @@ cd coachtech-furima
 
 ## Laravel環境構築
 - docker-compose exec php bash
-- cd /var/www/html
 - composer install
 - cp .env.example .env
 - php artisan key:generate
