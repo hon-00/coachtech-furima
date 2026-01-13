@@ -10,7 +10,12 @@ cd coachtech-furima
 - composer install
 - cp .env.example .env
 - php artisan key:generate
+- chmod -R 775 storage bootstrap/cache
 - php artisan migrate:fresh --seed
+
+### DB設定（Docker用）
+`.env` は `.env.example` をコピーして使用してください。  
+Docker 環境では、MySQL コンテナ名をホストとして指定するため`DB_HOST=mysql` となっています。
 
 ## 開発環境確認
 - トップページ: http://localhost/
