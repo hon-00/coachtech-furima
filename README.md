@@ -2,7 +2,7 @@
 
 ## 環境構築
 - git clone git@github.com:hon-00/coachtech-furima.git
-cd coachtech-furima
+- cd coachtech-furima
 - docker-compose up -d --build
 
 ## Laravel環境構築
