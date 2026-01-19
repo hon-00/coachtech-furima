@@ -17,7 +17,6 @@ class Item extends Model
         'price',
         'brand',
         'image',
-        'sold_flag',
     ];
 
     public function user()
@@ -40,8 +39,8 @@ class Item extends Model
         return $this->hasMany(Like::class);
     }
 
-    public function order()
+    public function transaction()
     {
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Transaction::class);
     }
 }

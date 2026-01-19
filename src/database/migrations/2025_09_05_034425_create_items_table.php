@@ -25,7 +25,6 @@ class CreateItemsTable extends Migration
             $table->bigInteger('price');
             $table->string('brand', 100)->nullable();
             $table->string('image');
-            $table->boolean('sold_flag')->default(false);
             $table->timestamps();
         });
     }
