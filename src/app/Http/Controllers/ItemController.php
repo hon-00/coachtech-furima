@@ -15,7 +15,7 @@ class ItemController extends Controller
         $tab = $request->query('tab', 'recommend');
 
         if ($tab === 'mylist' && auth()->check()) {
-            $query = auth()->user()->likedItems();
+            $query = auth()->user()->likedItems()->with('transaction');
 
             if ($keyword) {
                 $query->where('name', 'like', "%{$keyword}%");
@@ -25,7 +25,7 @@ class ItemController extends Controller
         }
 
         else {
-            $query = Item::query();
+            $query = Item::query()->with('transaction');
 
             if (auth()->check()) {
                 $query->where('user_id', '!=', auth()->id());
@@ -47,6 +47,7 @@ class ItemController extends Controller
             'user',
             'likes',
             'comments.user',
+            'transaction',
         ])
         ->withCount('comments')
         ->findOrFail($item_id);
@@ -71,7 +72,6 @@ class ItemController extends Controller
         $validated['image'] = $request->file('image')?->store('item_images', 'public');
 
         $validated['user_id'] = auth()->id();
-        $validated['sold_flag'] = false;
 
         $item = Item::create($validated);
 

@@ -43,4 +43,9 @@ class Item extends Model
     {
         return $this->hasOne(Transaction::class);
     }
+
+    public function isSold(): bool
+    {
+        return $this->transaction?->status === 'completed';
+    }
 }

@@ -17,7 +17,6 @@ class ItemFactory extends Factory
             'price' => $this->faker->numberBetween(500, 50000),
             'brand' => $this->faker->optional()->company(),
             'image' => 'dummy.jpg',
-            'sold_flag' => false,
         ];
     }
 }
