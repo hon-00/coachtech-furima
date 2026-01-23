@@ -56,6 +56,14 @@
     </div>
 
     <div class="content-item">
+        @php
+            $imageSrc = function ($img) {
+                if (! $img) return asset('images/no_image.png');
+                return filter_var($img, FILTER_VALIDATE_URL)
+                    ? $img : asset('storage/' . $img);
+            };
+        @endphp
+
         @if($page == 'sell')
             <div class="product-list">
                 @forelse($listedItems as $item)
@@ -66,7 +74,7 @@
                         @if($transaction)
                             <!-- 取引あり：取引詳細へ -->
                             <a href="{{ route('transactions.show', $transaction->id) }}">
-                                <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
+                                <img class="product-img" src="{{ $imageSrc($item->image) }}" alt="{{ $item->name }}">
                                 <p class="product-name">{{ $item->name }}</p>
                             </a>
 
@@ -78,7 +86,7 @@
                         @else
                             <!-- 取引なし：商品詳細へ -->
                             <a href="{{ route('items.show', $item->id) }}">
-                                <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
+                                <img class="product-img" src="{{ $imageSrc($item->image) }}" alt="{{ $item->name }}">
                                 <p class="product-name">{{ $item->name }}</p>
                             </a>
                         @endif
@@ -93,8 +101,8 @@
                 @php $item = $transaction->item; @endphp
                     <div class="product-item">
                         <a href="{{ route('transactions.show', $transaction->id) }}">
-                            <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
-                            <p class="product-name">{{ $item->name }}</p>
+                            <img class="product-img" src="{{ $imageSrc($item?->image) }}" alt="{{ $item?->name ?? '（商品なし）' }}">
+                            <p class="product-name">{{ $item?->name ?? '（商品なし）' }}</p>
                         </a>
                         <span class="sold-label">Sold</span>
                     </div>
@@ -108,8 +116,8 @@
                     @php $item = $transaction->item; @endphp
                     <div class="product-item">
                         <a href="{{ route('transactions.show', $transaction->id) }}">
-                            <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
-                            <p class="product-name">{{ $item->name }}</p>
+                            <img class="product-img" src="{{ $imageSrc($item?->image) }}" alt="{{ $item?->name ?? '（商品なし）' }}">
+                            <p class="product-name">{{ $item?->name ?? '（商品なし）' }}</p>
                             @if(($transaction->unread_count ?? 0) > 0)
                                 <span class="unread-badge">{{ $transaction->unread_count }}</span>
                             @endif

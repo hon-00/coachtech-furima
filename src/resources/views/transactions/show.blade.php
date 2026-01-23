@@ -47,7 +47,12 @@
 
         <div class="content-info">
             <div class="content-info__img">
-                <img src="{{ $transactionItem->image ? asset('storage/' . $transactionItem->image) : asset('images/no_image.png') }}" alt="{{ $transactionItem->name }}">
+                @php
+                    $img = $transactionItem->image ?? null;
+                    $src = $img ? (filter_var($img, FILTER_VALIDATE_URL) ? $img : asset('storage/' . $img))
+                                : asset('images/no_image.png');
+                @endphp
+                <img src="{{ $src }}" alt="{{ $transactionItem->name }}">
             </div>
             <div class="content-info__details">
                 <h3 class="content-info__title">{{ $transactionItem->name }}</h3>

@@ -28,9 +28,15 @@
             @else
                 <div class="product-list">
                     @foreach($items as $item)
+                        @php
+                            $img = $item->image;
+                            $src = $img
+                                ? (filter_var($img, FILTER_VALIDATE_URL) ? $img : asset('storage/' . $img))
+                                : asset('images/no_image.png');
+                        @endphp
                         <div class="product-item">
                             <a href="{{ route('items.show', $item->id) }}">
-                                <img class="product-img" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
+                                <img class="product-img" src="{{ $src }}" alt="{{ $item->name }}">
                                 <p class="product-name">{{ $item->name }}</p>
                             </a>
                             @if($item->isSold())
@@ -46,9 +52,15 @@
     @else
         <div class="product-list">
             @foreach ($items as $item)
+                @php
+                    $img = $item->image;
+                    $src = $img
+                        ? (filter_var($img, FILTER_VALIDATE_URL) ? $img : asset('storage/' . $img))
+                        : asset('images/no_image.png');
+                @endphp
                 <div class="product-item">
                     <a href="{{ route('items.show', $item->id) }}">
-                        <img class="product-img" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
+                        <img class="product-img" src="{{ $src }}" alt="{{ $item->name }}">
                         <p class="product-name">{{ $item->name }}</p>
                     </a>
                     @if($item->isSold())
