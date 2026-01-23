@@ -8,7 +8,7 @@
 <div class="item-container">
     <div class="item-img">
         <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
-        @if($item->sold_flag)
+        @if($item->isSold())
             <span class="sold-label">Sold</span>
         @endif
     </div>
@@ -38,10 +38,11 @@
                     <span class="comment-count">{{ $item->comments->count() }}</span>
                 </a>
             </div>
-            @if(!$item->sold_flag)
-                <a class="purchase-link" href="{{ route('purchase.create', $item->id) }}">
-                購入手続きへ
-                </a>
+            @if(!$item->isSold())
+                <form class="purchase-form" action="{{ route('transactions.store', $item) }}" method="POST">
+                    @csrf
+                    <button class="purchase-button" type="submit">購入手続きへ</button>
+                </form>
             @endif
         </div>
         <div class="item-detail">

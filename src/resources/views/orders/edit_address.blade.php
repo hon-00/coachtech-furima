@@ -8,7 +8,7 @@
 <div class="content">
     <h1 class="content-title">住所の変更</h1>
 
-    <form class="content-form" action="{{ route('purchase.updateAddress', ['item' => $item->id]) }}" method="POST">
+    <form class="content-form" action="{{ route('purchase.updateAddress', ['transaction' => $transaction->id]) }}" method="POST">
         @csrf
         @method('PUT')
 
