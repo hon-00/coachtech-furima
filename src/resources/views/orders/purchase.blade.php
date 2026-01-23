@@ -33,7 +33,7 @@
         </div>
 
         <!-- 支払い方法を選んだ瞬間にGET送信 -->
-        <form action="{{ route('purchase.create', $item->id) }}" method="GET" id="paymentForm">
+        <form action="{{ route('purchase.create', ['transaction' => $transaction->id]) }}" method="GET" id="paymentForm">
             <div class="purchase__payment">
                 <label class="purchase__payment-title">支払い方法</label>
                 <div class="purchase__payment-select">
@@ -49,7 +49,7 @@
         <div class="purchase__delivery">
             <div class="purchase__delivery-row">
                 <h3 class="purchase__delivery-title">配送先</h3>
-                <a class="purchase__delivery-link" href="{{ route('purchase.editAddress', ['item' => $item->id]) }}">変更する</a>
+                <a class="purchase__delivery-link" href="{{ route('purchase.editAddress', ['transaction' => $transaction->id]) }}">変更する</a>
             </div>
             <div class="purchase__delivery-content">
                 <p class="purchase__delivery-text"><span>〒</span>{{ $user->postal_code }}</p>
@@ -80,7 +80,7 @@
             </p>
         </div>
 
-        <form action="{{ route('purchase.store', $item->id) }}" method="POST">
+        <form action="{{ route('purchase.store', ['transaction' => $transaction->id]) }}" method="POST">
             @csrf
             <input type="hidden" name="payment" value="{{ $payment }}">
             <input type="hidden" name="address" value="{{ $user->address }}">

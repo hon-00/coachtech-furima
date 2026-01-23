@@ -98,12 +98,13 @@
     margin-left: 6px;
 }
 
-.purchase-link {
+.purchase-button {
     display: block;
     width: 90%;
     height: 45px;
     background: #ff4f4f;
     border-radius: 3px;
+    border: none;
     color: #fff;
     text-decoration: none;
     font-weight: bold;

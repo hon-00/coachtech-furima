@@ -6,13 +6,14 @@
     <title>COACHTECH FURIMA</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('css')
 </head>
 <body>
     <header class="header">
         <div class="header-inner">
             <h1 class="header-logo">
-                <a class="header-logo__link" href="">
+                <a class="header-logo__link" href="{{ route('home') }}">
                     <img class="header-logo__img" src="{{ asset('images/logo.svg') }}" alt="Logo" />
                 </a>
             </h1>
@@ -21,5 +22,6 @@
     <main>
         @yield('content')
     </main>
+    @yield('script')
 </body>
 </html>
