@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TransactionCompletedMail;
+use App\Models\Review;
 
 class TransactionController extends Controller
 {
@@ -32,7 +33,7 @@ class TransactionController extends Controller
             'status'    => Transaction::STATUS_TRADING,
         ]);
 
-        return redirect()->route('transactions.show', $transaction);
+        return redirect()->route('purchase.create', ['transaction' => $transaction->id]);
     }
 
     public function show(Transaction $transaction)
@@ -57,11 +58,17 @@ class TransactionController extends Controller
 
         $chatPartner = $this->getChatPartner($transaction, $currentUserId);
 
+        $hasReviewed = Review::query()
+            ->where('transaction_id', $transaction->id)
+            ->where('reviewer_id', $currentUserId)
+            ->exists();
+
         return view('transactions.show', compact(
             'transaction',
             'messages',
             'sidebarTransactions',
-            'chatPartner'
+            'chatPartner',
+            'hasReviewed',
         ));
     }
 
@@ -86,10 +93,11 @@ class TransactionController extends Controller
         $transaction->load(['seller', 'buyer', 'item']);
         try {
             Mail::to($transaction->seller->email)->send(new TransactionCompletedMail($transaction));
-        } catch (\Throwable $e) {
+        } catch (\Throwable $mailSendException) {
             \Log::error('transaction completed mail failed', [
-                'transaction_id' => $transaction->id,
-                'error' => $e->getMessage(),
+                'transaction_id'      => $transaction->id,
+                'exception_class'     => get_class($mailSendException),
+                'exception_message'   => $mailSendException->getMessage(),
             ]);
         }
 

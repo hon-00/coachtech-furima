@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\MessageDraftController;
+use App\Http\Controllers\ReviewController;
 
 Route::get('/', [ItemController::class, 'index'])->name('home');
 
@@ -58,6 +59,10 @@ Route::middleware('auth')->group(function () {
         Route::delete('/messages/{message}', [MessageController::class, 'destroy'])
             ->name('messages.destroy');
     });
+
+
+    Route::post('/transactions/{transaction}/reviews', [ReviewController::class, 'store'])
+        ->name('reviews.store');
 
     Route::get('/items/create', [ItemController::class, 'create'])
         ->name('items.create');

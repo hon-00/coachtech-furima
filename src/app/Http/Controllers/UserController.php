@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
+use App\Models\Review;
 
 class UserController extends Controller
 {
@@ -47,11 +48,24 @@ class UserController extends Controller
             ->orderByDesc('latest_message_at')
             ->get();
 
+        $unreadTotal = (int) $tradingTransactions->sum('unread_count');
+
+        $reviewStats = Review::query()
+            ->where('reviewee_id', $user->id)
+            ->selectRaw('COUNT(*) as review_count, AVG(rating) as avg_rating')
+            ->first();
+
+        $reviewCount = (int) ($reviewStats->review_count ?? 0);
+        $averageRating = $reviewCount > 0 ? (int) round((float) $reviewStats->avg_rating) : null;
+
         return view('mypage.show', compact(
             'user',
             'listedItems',
             'purchasedTransactions',
-            'tradingTransactions'
+            'tradingTransactions',
+            'unreadTotal',
+            'averageRating',
+            'reviewCount'
         ));
     }
 
