@@ -14,7 +14,8 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id();$table->unsignedBigInteger('user_id');
+            $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')
@@ -25,7 +26,6 @@ class CreateItemsTable extends Migration
             $table->bigInteger('price');
             $table->string('brand', 100)->nullable();
             $table->string('image');
-            $table->boolean('sold_flag')->default(false);
             $table->timestamps();
         });
     }

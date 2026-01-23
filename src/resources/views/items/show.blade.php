@@ -7,15 +7,22 @@
 @section('content')
 <div class="item-container">
     <div class="item-img">
-        <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
-        @if($item->sold_flag)
+        @php
+            $img = $item->image;
+            $src = $img
+                ? (filter_var($img, FILTER_VALIDATE_URL) ? $img : asset('storage/' . $img))
+                : asset('images/no_image.png');
+        @endphp
+        <img src="{{ $src }}" alt="{{ $item->name }}">
+
+        @if($item->isSold())
             <span class="sold-label">Sold</span>
         @endif
     </div>
     <div class="item-content">
         <div class="item-info">
             <h1 class="item-title">{{ $item->name }}</h1>
-            <p class="brand-title">{{ $item->description }}</p>
+            <p class="brand-title">{{ $item->brand }}</p>
             <p class="item-price">
                 <span>¥</span>{{ number_format($item->price) }}<span>(税込)</span>
             </p>
@@ -38,10 +45,11 @@
                     <span class="comment-count">{{ $item->comments->count() }}</span>
                 </a>
             </div>
-            @if(!$item->sold_flag)
-                <a class="purchase-link" href="{{ route('purchase.create', $item->id) }}">
-                購入手続きへ
-                </a>
+            @if(!$item->isSold())
+                <form class="purchase-form" action="{{ route('transactions.store', $item) }}" method="POST">
+                    @csrf
+                    <button class="purchase-button" type="submit">購入手続きへ</button>
+                </form>
             @endif
         </div>
         <div class="item-detail">

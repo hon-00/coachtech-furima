@@ -1,0 +1,412 @@
+.content {
+    max-width: 1450px;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+}
+
+.content-side {
+    background-color: #7c7c7c;
+}
+
+.content-side__group {
+    margin: 15px 30px;
+    padding: 15px 0 5px;
+    text-align: center;
+    font-size: 18px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+}
+
+.content-side__title {
+    margin-top: 25px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 2.8px;
+}
+
+.content-side__item {
+    display: block;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: #333;
+    line-height: 1.4;
+}
+
+.content-main__header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: 16px;
+    padding: 10px 0 10px 25px;
+    border-bottom: #7c7c7c 2px solid;
+}
+
+.content-main__header--left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.content-main__header--icon {
+    display: flex;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.content-title {
+    text-align: left;
+    display: block;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 取引完了ボタン領域 */
+.content-button {
+    display: flex;
+    justify-content: flex-end;
+    justify-content: center;
+}
+
+.content-form {
+    width: auto;
+}
+
+.form-button {
+    width: 130px;
+    height: 40px;
+    margin-right: 45px;
+    background-color: #fe7570;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bolder;
+    letter-spacing: 0.8px;
+}
+
+.form-button:hover {
+    opacity: 0.9;
+}
+
+/* =========================
+商品情報（画像 + 情報）
+========================= */
+.content-info {
+    width: 100%;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    border-bottom: #7c7c7c 2px solid;
+}
+
+.content-info__img {
+    width: 180px;
+    height: 180px;
+    margin: 0 0 10px 30px;
+    background: #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.content-info__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.content-info__details {
+    flex: 1;
+    min-width: 0;
+}
+
+.content-info__title {
+    margin: 0 0 10px 0;
+    font-size: 25px;
+    font-weight: bold;
+    color: #222;
+}
+
+.content-info__price {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bolder;
+    color: #222;
+}
+
+.content-info__price span {
+    font-weight: normal;
+    font-size: 14px;
+    color: #444;
+    margin: 0 2px;
+}
+
+.content-chat {
+    width: 90%;
+    margin: 10px auto;
+}
+
+/* メッセージ一覧枠 */
+.content-chat__messages {
+    padding: 18px;
+    background: #fff;
+    min-height: 360px;
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+/* 吹き出し（左右） */
+.message {
+    width: 65%;
+    margin-bottom: 14px;
+    color: #222;
+    word-break: break-word;
+    text-align: left;
+}
+
+.message-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.message-meta--received {
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.message.sent {
+    margin-left: auto;
+}
+
+.message-meta--sent {
+    flex-direction: row-reverse;
+}
+
+.message-meta__icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message-meta__name {
+    margin: 0 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.message-text {
+    margin: 0;
+    padding: 15px 12px;
+    background: #d5d5d5;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.message-edit__text {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 15px 12px;
+    background: #d5d5d5;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: none;
+}
+
+.message-ops {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.message-ops form {
+    display: inline;
+}
+
+.message-operation {
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    text-decoration: none;
+    text-align: end;
+    font: inherit;
+    color: #5F5F5F;
+    background: transparent;
+    border: none;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* 画像メッセージ */
+.message-image {
+    margin-top: 40px;
+}
+
+.message-image img {
+    width: 150px;
+    border-radius: 6px;
+    display: block;
+}
+
+.content-chat__form--wrapper {
+    margin: 20px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    text-align: left;
+}
+
+.chat-form {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.chat-form__text {
+    flex: 1;
+    height: 35px;
+    resize: none;
+    border: 1px solid #7c7c7c;
+    border-radius: 3px;
+    padding: 7px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    align-items: center;
+    outline: none;
+}
+
+.chat-form__file {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    padding: 0 16px;
+    border: 1.5px solid rgb(255, 80, 74);
+    border-radius: 8px;
+    color: rgb(255, 80, 74);
+    background: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.chat-form__file input[type="file"] {
+    display: none;
+}
+
+/* 送信ボタン */
+.chat-form__button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.chat-form__button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ユーザーレビュー */
+.review-box {
+    position: absolute;
+    top: 55%;
+    left: 40%;
+    width: 550px;
+    height: 330px;
+    background-color: #FDFCE6;
+    border: 1px solid #000000;
+    border-radius: 15px;
+}
+
+.review-box__title {
+    padding: 0 0 10px 15px;
+    font-size: 24px;
+    color: #333;
+    border-bottom: #000000 1px solid;
+}
+
+.review-box__subtitle {
+    padding-left: 10px;
+    font-size: 16px;
+    color: #aaa;
+}
+
+
+.review-stars {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 20px;
+}
+
+.review-stars input {
+    display: none;
+}
+
+.review-stars__icon {
+    font-size: 70px;
+    line-height: 1;
+    color: #d9d9d9;
+    transition: color 0.2s;
+}
+
+.review-stars__label:hover .review-stars__icon,
+.review-stars__label:hover~.review-stars__label .review-stars__icon {
+    color: #FFF048;
+}
+
+.review-stars__input:checked~.review-stars__label .review-stars__icon {
+    color: #FFF048;
+}
+
+.review-submit {
+    margin-top: 50px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: end;
+    border-top: #000 1px solid;
+}
+
+.review-submit__button {
+    width: 110px;
+    height: 45px;
+    margin-top: 10px;
+    background-color: #fe7570;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    letter-spacing: 0.8px;
+}
