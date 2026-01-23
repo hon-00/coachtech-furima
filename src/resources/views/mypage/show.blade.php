@@ -16,7 +16,19 @@
             <img src="{{ $user->profile_image_url }}" alt="アイコン">
         </div>
         <div class="profile-info">
-            <p class="profile-name">{{ $user->name }}</p>
+            <div class="profile-text">
+                <p class="profile-name">{{ $user->name }}</p>
+
+                @if ($averageRating !== null)
+                    <div class="profile-rating">
+                        <span class="rating-stars">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <span class="rating-star {{ $i <= $averageRating ? 'is-filled' : 'is-empty' }}">★</span>
+                            @endfor
+                        </span>
+                    </div>
+                @endif
+            </div>
             <a class="profile-edit__button" href="{{ route('mypage.edit') }}">プロフィールを編集</a>
         </div>
     </div>
@@ -33,6 +45,13 @@
             <li class="tab-item">
                 <a class="tab-link {{ $page == 'buy' ? 'active' : '' }}" href="{{ route('mypage.show', ['page' => 'buy']) }}" >購入した商品</a>
             </li>
+            <li class="tab-item">
+                <a class="tab-link {{ $page == 'trading' ? 'active' : '' }}" href="{{ route('mypage.show' , ['page' => 'trading']) }}" >取引中の商品
+                @if ($unreadTotal > 0)
+                    <span class="tab-item__unread-count">{{ $unreadTotal }}</span>
+                @endif
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -40,13 +59,28 @@
         @if($page == 'sell')
             <div class="product-list">
                 @forelse($listedItems as $item)
+                    @php
+                        $transaction = $item->transaction;
+                    @endphp
                     <div class="product-item">
-                        <a href="{{ route('items.show', $item->id) }}">
-                            <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
-                            <p class="product-name">{{ $item->name }}</p>
-                        </a>
-                        @if($item->sold_flag)
-                            <span class="sold-label">Sold</span>
+                        @if($transaction)
+                            <!-- 取引あり：取引詳細へ -->
+                            <a href="{{ route('transactions.show', $transaction->id) }}">
+                                <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
+                                <p class="product-name">{{ $item->name }}</p>
+                            </a>
+
+                            @if($transaction->isTrading())
+                                <span class="trading-label">取引中</span>
+                            @elseif($transaction->isCompleted())
+                                <span class="sold-label">Sold</span>
+                            @endif
+                        @else
+                            <!-- 取引なし：商品詳細へ -->
+                            <a href="{{ route('items.show', $item->id) }}">
+                                <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
+                                <p class="product-name">{{ $item->name }}</p>
+                            </a>
                         @endif
                     </div>
                 @empty
@@ -55,23 +89,39 @@
             </div>
         @elseif($page == 'buy')
             <div class="product-list">
-                @forelse($purchasedItems as $order)
-                    @php $item = $order->item; @endphp
+                @forelse($purchasedTransactions as $transaction)
+                @php $item = $transaction->item; @endphp
                     <div class="product-item">
-                        <a href="{{ route('items.show', $item->id) }}">
+                        <a href="{{ route('transactions.show', $transaction->id) }}">
                             <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
                             <p class="product-name">{{ $item->name }}</p>
                         </a>
-                        @if($item->sold_flag)
-                            <span class="sold-label">Sold</span>
-                        @endif
+                        <span class="sold-label">Sold</span>
                     </div>
                 @empty
                     <p class="no-items">購入した商品はありません</p>
                 @endforelse
             </div>
+        @elseif($page == 'trading')
+            <div class="product-list">
+                @forelse($tradingTransactions as $transaction)
+                    @php $item = $transaction->item; @endphp
+                    <div class="product-item">
+                        <a href="{{ route('transactions.show', $transaction->id) }}">
+                            <img class="product-img" src="{{ $item->image ? asset('storage/' . e($item->image)) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
+                            <p class="product-name">{{ $item->name }}</p>
+                            @if(($transaction->unread_count ?? 0) > 0)
+                                <span class="unread-badge">{{ $transaction->unread_count }}</span>
+                            @endif
+                        </a>
+                    </div>
+                @empty
+                    <p class="no-items">
+                        取引中の商品はありません
+                    </p>
+                @endforelse
+            </div>
         @endif
     </div>
-
 </div>
 @endsection

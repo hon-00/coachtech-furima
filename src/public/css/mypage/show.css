@@ -19,9 +19,9 @@
     gap: 30px;
 }
 
-.profile-icon {
-    width: 130px;
-    height: 130px;
+.profile-icon img {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -34,9 +34,35 @@
     align-items: center;
 }
 
+.profile-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .profile-name {
     font-size: 25px;
     font-weight: bold;
+}
+
+.profile-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 20px;
+}
+
+.rating-stars {
+    font-size: 30px;
+    line-height: 1;
+}
+
+.rating-star.is-filled {
+    color: #FFF048;
+}
+
+.rating-star.is-empty {
+    color: #d9d9d9;
 }
 
 .profile-edit__button {
@@ -66,9 +92,26 @@
     list-style: none;
 }
 
+.tab-item__unread-count {
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: red;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+
 .tab-link {
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     color: #555;
+    gap: 8px;
 }
 
 .tab-link.active {
@@ -124,4 +167,23 @@
     font-weight: bold;
     font-size: 25px;
     border-radius: 3px;
+}
+
+.unread-badge {
+    display: flex;
+    position: absolute;
+    top: 8px;
+    left: 30px;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 999px;
+    align-items: center;
+    justify-content: center;
+    background: red;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
