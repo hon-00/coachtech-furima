@@ -15,18 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CategoriesTableSeeder::class,
+            UserSeeder::class,
+            ItemSeeder::class,
         ]);
-
-        if (app()->environment(['local', 'testing'])) {
-            \App\Models\User::factory(5)->create()->each(function ($user) {
-                $items = \App\Models\Item::factory(2)->create(['user_id' => $user->id]);
-                foreach ($items as $item) {
-                    \App\Models\Comment::factory(2)->create([
-                        'user_id' => $user->id,
-                        'item_id' => $item->id,
-                    ]);
-                }
-            });
-        }
     }
 }
