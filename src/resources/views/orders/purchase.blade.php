@@ -24,7 +24,13 @@
     <div class="purchase__group">
         <div class="purchase__item">
             <div class="purchase__item-img">
-                <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/no_image.png') }}" alt="{{ $item->name }}">
+                @php
+                    $img = $item->image;
+                    $src = $img
+                        ? (filter_var($img, FILTER_VALIDATE_URL) ? $img : asset('storage/' . $img))
+                        : asset('images/no_image.png');
+                @endphp
+                <img src="{{ $src }}" alt="{{ $item->name }}">
             </div>
             <div class="purchase__item-info">
                 <h2 class="purchase__item-title">{{ $item->name }}</h2>
