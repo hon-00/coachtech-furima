@@ -6,7 +6,6 @@ use App\Http\Requests\ReviewRequest;
 use App\Models\Review;
 use App\Models\Transaction;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
@@ -48,7 +47,6 @@ class ReviewController extends Controller
             'reviewer_id'    => $userId,
             'reviewee_id'    => $revieweeId,
             'rating'         => $validated['rating'],
-            'comment'        => $validated['comment'] ?? null,
         ]);
 
         return redirect()
