@@ -1,9 +1,14 @@
 /node_modules
 /vendor/
-/src/vendor/
+src/vendor/
 
-/src/storage/*
-!src/storage/.gitignore
+/src/storage/**
+!/src/storage/framework/
+!/src/storage/framework/**/.gitkeep
+!/src/storage/logs/
+!/src/storage/logs/**/.gitkeep
+/src/bootstrap/cache/**
+!/src/bootstrap/cache/.gitkeep
 
 /public/storage
 /src/public/storage
