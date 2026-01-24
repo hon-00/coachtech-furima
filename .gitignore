@@ -1,23 +1,29 @@
+/vendor
 /node_modules
-/vendor/
+
 /src/vendor/
 
-/src/storage/*
-!src/storage/.gitignore
+/src/storage/**
 
-/public/storage
+!/src/storage/framework/
+!/src/storage/framework/cache/
+!/src/storage/framework/sessions/
+!/src/storage/framework/views/
+!/src/storage/framework/cache/.gitkeep
+!/src/storage/framework/sessions/.gitkeep
+!/src/storage/framework/views/.gitkeep
+
+!/src/storage/logs/
+!/src/storage/logs/.gitkeep
+
 /src/public/storage
 
-.env
-.phpunit.result.cache
+/src/.env
+/src/.phpunit.result.cache
 docker-compose.override.yml
-Homestead.json
-Homestead.yaml
 npm-debug.log
 yarn-error.log
-
 /.idea
 /.vscode
 .cache/
-
 docker/mysql/data/
