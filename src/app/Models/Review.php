@@ -14,7 +14,6 @@ class Review extends Model
         'reviewer_id',
         'reviewee_id',
         'rating',
-        'comment',
     ];
 
     public function transaction()
