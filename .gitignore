@@ -1,13 +1,23 @@
 /node_modules
 /vendor/
-src/vendor/
+/src/vendor/
 
 /src/storage/**
+
 !/src/storage/framework/
-!/src/storage/framework/**/.gitkeep
+!/src/storage/framework/cache/
+!/src/storage/framework/sessions/
+!/src/storage/framework/views/
+
+!/src/storage/framework/cache/.gitkeep
+!/src/storage/framework/sessions/.gitkeep
+!/src/storage/framework/views/.gitkeep
+
 !/src/storage/logs/
-!/src/storage/logs/**/.gitkeep
+!/src/storage/logs/.gitkeep
+
 /src/bootstrap/cache/**
+!/src/bootstrap/cache/
 !/src/bootstrap/cache/.gitkeep
 
 /public/storage
