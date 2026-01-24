@@ -1,10 +1,9 @@
-/vendor
-/node_modules
+/vendor/
+/node_modules/
 
 /src/vendor/
 
 /src/storage/**
-
 !/src/storage/framework/
 !/src/storage/framework/cache/
 !/src/storage/framework/sessions/
@@ -23,6 +22,7 @@
 docker-compose.override.yml
 npm-debug.log
 yarn-error.log
+
 /.idea
 /.vscode
 .cache/
